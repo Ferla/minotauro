@@ -1,0 +1,22 @@
+<h1>Listing oficinas</h1>
+
+<table>
+  <tr>
+    <th>Municipio</th>
+    <th>Descripcion</th>
+  </tr>
+
+<% @oficinas.each do |oficina| %>
+  <tr>
+    <td><%=h oficina.municipio_id %></td>
+    <td><%=h oficina.descripcion %></td>
+    <td><%= link_to 'Show', oficina %></td>
+    <td><%= link_to 'Edit', edit_oficina_path(oficina) %></td>
+    <td><%= link_to 'Destroy', oficina, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New oficina', new_oficina_path %>

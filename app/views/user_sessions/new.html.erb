@@ -1,0 +1,49 @@
+<% form_for @user_session, :url => user_session_path do |f| %>
+<br/><img src="/images/logo_sapiencia.png"/>
+<div class="container">
+<div class="row-fluid">
+  	<div class="login">
+		  		<div class="span7">
+  		<div class="login-box-left">
+  		<div class="page-header">
+  			<h3>Login</h3>
+  			</div>
+  			<div class="page-content">
+  					<fieldset>
+  						<div class="clearfix">
+            		<span>Usuario</span>
+            		<div class="input">
+              		<%= f.text_field :username,{ :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'", :autofocus=>"true", :autocomplete=>"off", :required=>"true" } %>
+            		</div>
+          		</div>
+          		<div class="clearfix">
+            		<span>Contraseña</span>
+            		<div class="input">
+              		<%= f.password_field :password,{ :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'", :autocomplete=>"off" ,:required=>"true" }%>
+            		</div>
+          		</div>
+          		<div class="clearfix"><%= f.submit "Entrar",:class=>"btn btn-primary",
+:onClick=>"Element.show('imagenlogin')"%>
+        <%= image_tag "load.gif", :id =>'imagenlogin', :style => 'display:none;'%>
+          		</div>
+
+
+          	</fieldset>
+  				</div>
+  		</div>
+  	</div>
+			</div>
+        </div>
+
+<% if flash[:warninglogin] %>
+<div class="alert alert-error">
+<%= flash[:warninglogin] %>
+</div>
+</div>
+            <% end %>
+  <br />
+<% end %>

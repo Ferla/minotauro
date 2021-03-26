@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag 'scaffold'%>
+<div class="page-header">
+  <h3>INFORMACIÓN CONTABILIDAD</h3>
+</div>
+
+<table border="1">
+  <tr valign="middle" bgcolor="#00FF00" style="vertical-align:middle; font-size: 11px;">
+    <td style="vertical-align:middle"><strong>FONDO</strong></td>
+    <td style="vertical-align:middle"><strong>CONVOCATORIA</strong></td>
+    <td style="vertical-align:middle"><strong>IES</strong></td>
+    <td style="vertical-align:middle"><strong>OPERADOR_FINANCIERO</strong></td>
+    <td style="vertical-align:middle"><strong>TOTAL DESEMBOLSADO</strong></td>
+    <td style="vertical-align:middle"><strong>CREDITO</strong></td>
+    <td style="vertical-align:middle"><strong>SIMULACION</strong></td>
+    <% if @formato.to_s == 'DETALLADO'%>
+        <td style="vertical-align:middle"><strong>IDENTIFICACION</strong></td>
+        <td style="vertical-align:middle"><strong>NOMBRE COMPLETO</strong></td>
+    <% end %>
+  </tr>
+<% @informes.each do |i|%>
+  <tr valign="top" style="vertical-align:middle; font-size: 10px;">
+    <td style="vertical-align:middle"><div align="left"><%=i.fondo rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="left"><%=i.convocatoria rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="left"><%=i.ies rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="left"><%=i.operador_financiero rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="right"><%=camponumerico(i.t1) rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="right"><%=camponumerico(i.c1) rescue nil%></div></td>
+    <td style="vertical-align:middle"><div align="right"><%=camponumerico(i.s1) rescue nil%></div></td>
+    <% if @formato.to_s == 'DETALLADO'%>
+        <td style="vertical-align:middle"><div align="left"><%=i.documento rescue nil%></div></td>
+        <td style="vertical-align:middle"><div align="left"><%=i.nombre_completo rescue nil%></div></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

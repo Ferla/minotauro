@@ -1,0 +1,1 @@
+page.replace_html :personasalisbienes_form, :partial => "personasalisbienes", :object => @personasalisbien

@@ -1,0 +1,22 @@
+<h1>Listing comitessolicitudes</h1>
+
+<table>
+  <tr>
+    <th>Comite</th>
+    <th>Solicitud</th>
+  </tr>
+
+<% @comitessolicitudes.each do |comitessolicitud| %>
+  <tr>
+    <td><%=h comitessolicitud.comite_id %></td>
+    <td><%=h comitessolicitud.solicitud_id %></td>
+    <td><%= link_to 'Show', comitessolicitud %></td>
+    <td><%= link_to 'Edit', edit_comitessolicitud_path(comitessolicitud) %></td>
+    <td><%= link_to 'Destroy', comitessolicitud, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New comitessolicitud', new_comitessolicitud_path %>

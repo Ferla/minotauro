@@ -1,0 +1,42 @@
+<h1>Listing personasalisasociados</h1>
+
+<table>
+  <tr>
+    <th>Personasalistamiento</th>
+    <th>Matricula</th>
+    <th>Identificacion</th>
+    <th>Nombre</th>
+    <th>Direccion</th>
+    <th>Municipio</th>
+    <th>Nro escritura</th>
+    <th>Fecha escritura</th>
+    <th>Notaria</th>
+    <th>Analisis</th>
+    <th>Valida</th>
+    <th>User</th>
+  </tr>
+
+<% @personasalisasociados.each do |personasalisasociado| %>
+  <tr>
+    <td><%=h personasalisasociado.personasalistamiento_id %></td>
+    <td><%=h personasalisasociado.matricula %></td>
+    <td><%=h personasalisasociado.identificacion %></td>
+    <td><%=h personasalisasociado.nombre %></td>
+    <td><%=h personasalisasociado.direccion %></td>
+    <td><%=h personasalisasociado.municipio_id %></td>
+    <td><%=h personasalisasociado.nro_escritura %></td>
+    <td><%=h personasalisasociado.fecha_escritura %></td>
+    <td><%=h personasalisasociado.notaria_id %></td>
+    <td><%=h personasalisasociado.analisis %></td>
+    <td><%=h personasalisasociado.valida %></td>
+    <td><%=h personasalisasociado.user_id %></td>
+    <td><%= link_to 'Show', personasalisasociado %></td>
+    <td><%= link_to 'Edit', edit_personasalisasociado_path(personasalisasociado) %></td>
+    <td><%= link_to 'Destroy', personasalisasociado, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New personasalisasociado', new_personasalisasociado_path %>

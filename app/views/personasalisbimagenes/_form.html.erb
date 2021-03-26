@@ -1,0 +1,13 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <td width="30%"><div align="left"><strong>Descripcion</strong></div></td>
+    <td width="70%"><div align="left"><%= f.text_field :descripcion,{ :class => "span4",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+                <%= f.error_message_on :descripcion, :css_class =>"cerror"%></div></td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>Archivo</strong></div></td>
+    <td><div align="left"><%= f.file_field :peralisbien, { :class => "span4",:size => 100,:maxlength => 1000 } %>
+       <%= f.error_message_on :peralisbien, :css_class =>"cerror"%></div></td>
+  </tr>        
+</table>
+

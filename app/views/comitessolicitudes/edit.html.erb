@@ -1,0 +1,20 @@
+<h1>Editing comitessolicitud</h1>
+
+<% form_for(@comitessolicitud) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :comite_id %><br />
+    <%= f.text_field :comite_id %>
+  </p>
+  <p>
+    <%= f.label :solicitud_id %><br />
+    <%= f.text_field :solicitud_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @comitessolicitud %> |
+<%= link_to 'Back', comitessolicitudes_path %>

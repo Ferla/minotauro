@@ -1,0 +1,57 @@
+<legend>Telefonos <a href="javascript:void(0);" onclick="SINO('demo2<%=@persona.id%>')"><img src="/images/vermas.png"></img></a></legend>
+<% remote_form_for [@persona, @personastelefono] do |form| %>
+  <div id="demo2<%=@persona.id%>" style="display:none;">
+    <% if !@personastelefono.id %>
+       <% if permiso("personastelefono","C").to_s == "S" %>
+        <%= render :partial => "/personastelefonos/personastelefonos_form"%>
+       <% end%>
+    <% end %>
+  </div>
+<% if @persona.personastelefonos.exists? %>
+<table class="table table-bordered table-striped table-hover">
+  <tr valign="middle">
+    <th width="5%"></th>
+    <th width="15%">Fecha</th>
+    <th width="35%">Telefono</th>
+    <th width="20%">Ciudad</th>
+    <th width="25%">Observacion</th>
+  </tr>
+<% for personastelefono in @persona.personastelefonos.find(:all, :order => 'updated_at DESC') %>
+   <% if personastelefono.id != @personastelefono.id %>
+   <tr id="personastelefono_<%=personastelefono.id%>">
+     <td><% if permiso("personastelefono","A").to_s == "S" %>
+         <%= link_to_remote(image_tag("check.png", :title => "Ratificar"),{:url => edit_persona_personastelefono_path(@persona, personastelefono),:method => :get})%>
+         <%= link_to_remote(image_tag("borrar.png", :title => "Eliminar"),{:url => persona_personastelefono_path(@persona, personastelefono),
+		:method => :delete, :confirm => "¿Seguro?"})%>
+         <% end %>
+      </td>
+     <td><%=h personastelefono.updated_at.strftime("%Y-%m-%d %X")%><br/>
+         <%=h personastelefono.user.username rescue nil%></td>
+     <td><%=h personastelefono.telefono %><br/><%=h personastelefono.tipo %></td>
+     <td><%=h personastelefono.ciudad %></td>
+     <td><%=h personastelefono.observacion %></td>
+   </tr>
+<% else %>
+      <%= render :partial => "/personastelefonos/personastelefonos_form" %>
+      <table class="table table-bordered table-striped">
+<% end %>
+        <% end %>
+</table>
+<% else %>
+<div id="personastelefono">
+    <div class="alert alert-success">No hay datos asociados</div>
+</div>
+<% end %>
+<%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:personastelefono] %>
+<div id="personastelefono">
+    <div class="alert alert-success">
+      <%= flash[:personastelefono] %>
+    </div>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('personastelefono');", 5000)
+</script>
+<% end %>

@@ -1,0 +1,15 @@
+rvm use ruby-1.8.7-head
+rvm gemset use 2.3.8
+
+mongrel_cluster_ctl stop 2> /dev/null
+sudo /etc/init.d/nginx stop
+
+sudo rm -r /home/minotauro/log/*.log
+sudo rm -r /home/minotauro/tmp/pids/*.pid
+
+sudo rm -r /home/siis/log/*.log
+sudo rm -r /home/siis/tmp/pids/*.pid
+
+ps -fe | grep mongrel
+
+

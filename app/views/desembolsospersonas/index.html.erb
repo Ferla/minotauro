@@ -1,0 +1,74 @@
+<legend>Información Contabilidad</legend>
+  <% form_tag request.path, :method => 'get', :class=>"well" do %>
+    <% content_tag :label do %>
+     <div class="control-group">
+        <label class="control-label" for="appendedInputButtons">Digite la identificación - Nombre a buscar</label>
+        <div class="controls">
+          <div class="input-append">
+            <%= text_field_tag :identificacion, params[:identificacion],{ :class => "span2", :autocomplete=>"off", :placeholder=>"Identificacion" } %>
+            <%= text_field_tag :nombre, params[:nombre],{ :class => "span4", :autocomplete=>"off",:placeholder=>"Nombre" } %>
+            <%= submit_tag 'Buscar', :class=>"btn btn-primary"%>
+          </div>
+        </div>
+     </div>
+    <% end %>
+  <% end %>
+<br/>
+<% if @desembolsospersonas.count.to_i > 0 %>
+    <table class="table table-bordered table-striped">
+      <tr valign="middle" >
+        <th></th>
+        <th><div align="center">Documento</div></th>
+        <th><div align="center">Documento anterior</div></th>
+        <th>Nombre completo</th>
+        <th>IES</th>
+        <th><div align="center">Minotauro?</div></th>
+      </tr>
+    <% @desembolsospersonas.each do |desembolsospersona| %>
+      <tr>
+        <td width="5%"><div align="center"><%= link_to image_tag("editar.png", :title => "Editar"), edit_desembolsospersona_path(desembolsospersona)%></div></td>
+        <td><div align="center"><%=h desembolsospersona.documento %></div></td>
+        <td><div align="center"><%=h desembolsospersona.documento_anterior %></div></td>
+        <td><%=h desembolsospersona.nombre_completo %></td>
+        <td><%=h desembolsospersona.ies %></td>
+        <td><div align="center"><% if desembolsospersona.persona_id.to_s != "" %><%=image_tag("check.png", :title => "Existe en Minotauro")%><%else%><%=image_tag("cancel.png", :title => "NO Existe en Minotauro")%> <%end%></div></td>
+      </tr>
+    <% end %>
+    </table>
+    <br/>
+    <div class="pagination"><ul><%= will_paginate @desembolsospersonas, :previous_label => '&laquo; Anterior', :next_label => 'Siguiente &raquo;'  %></ul></div>
+    <div class="alert alert-success">Total Registros : <%= @desembolsospersonas.total_entries %></div>
+    <br/>
+<% end %>
+<legend>Buscador Avanzado</legend>
+<% form_tag informe_desembolsospersonas_path, :method => 'get' do %>
+    <div align="center">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td width="40%"><strong>Fondo</strong></td>
+        <td width="60%"><%=select("ubicacion", "fondo", Objeto.find_by_sql(["select distinct fondo from desembolsos order by fondo"]).collect {|p| [ p.fondo.to_s, p.fondo.to_s ] }, { :include_blank => true },{ :style=>"width:500px" }) %></td>
+      </tr>
+      <tr>
+        <td><strong>Convocatoria</strong></td>
+        <td><%=select("ubicacion", "convocatoria", Objeto.find_by_sql(["select distinct convocatoria from desembolsos order by convocatoria"]).collect {|p| [ p.convocatoria.to_s, p.convocatoria.to_s ] }, { :include_blank => true },{ :style=>"width:500px" }) %></td>
+      </tr>
+      <tr>
+        <td><strong>IES</strong></td>
+        <td><%=select("ubicacion", "ies", Objeto.find_by_sql(["select distinct ies from desembolsos order by ies"]).collect {|p| [ p.ies.to_s, p.ies.to_s ] }, { :include_blank => true },{ :style=>"width:500px" }) %></td>
+      </tr>
+      <tr>
+        <td><strong>Operador Financiero</strong></td>
+        <td><%=select("ubicacion", "operador_financiero", Objeto.find_by_sql(["select distinct operador_financiero from desembolsos order by operador_financiero"]).collect {|p| [ p.operador_financiero.to_s, p.operador_financiero.to_s ] }, { :include_blank => true },{ :style=>"width:500px" }) %></td>
+      </tr>
+      <tr>
+        <td><strong>Generación</strong></td>
+        <td><%= select("ubicacion","formato", [["CONSOLIDADO","CONSOLIDADO"],["DETALLADO","DETALLADO"]],{ :include_blank => true },{ :style=>"width:200px" })%></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><%= submit_tag "Buscar",:class=>"btn btn-primary" %></td>
+      </tr>
+    </table>
+    </div>
+<% end %>
+<br/>

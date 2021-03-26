@@ -1,0 +1,36 @@
+<%= javascript_include_tag 'bootstrap-tab'%>
+<legend>Información Contabilidad <%= link_to 'Regresar', desembolsospersonas_path, :class=>"btn btn-xs btn-success"%></legend>
+<table class="table table-bordered table-striped">
+  <tr valign="middle" >
+    <th><div align="center">Documento</div></th>
+    <th><div align="center">Documento anterior</div></th>
+    <th>Nombre completo</th>
+    <th>IES</th>
+    <th><div align="center">Minotauro?</div></th>
+  </tr>
+  <tr>
+    <td><div align="center"><%=h @desembolsospersona.documento %></div></td>
+    <td><div align="center"><%=h @desembolsospersona.documento_anterior %></div></td>
+    <td><%=h @desembolsospersona.nombre_completo %></td>
+    <td><%=h @desembolsospersona.ies %></td>
+    <td><div align="center"><% if @desembolsospersona.persona_id.to_s != "" %><%=image_tag("check.png", :title => "Existe en Minotauro")%><%else%><%=image_tag("cancel.png", :title => "NO Existe en Minotauro")%> <%end%></div></td>
+  </tr>
+</table>
+<div class="tabbable" style="margin-bottom: 18px;">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Detalle</a></li>
+    <li><a href="#tab2" data-toggle="tab">Validación</a></li>
+    <li><a href="#tab3" data-toggle="tab">Creditos</a></li>
+  </ul>
+  <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+    <div class="tab-pane active" id="tab1"><%= render 'desembolsos' %></div>
+    <div class="tab-pane" id="tab2"><%= render 'validacion' %></div>
+    <div class="tab-pane" id="tab3"><%= render 'credito' %></div>
+  </div>
+</div> <!-- /tabbable -->
+
+
+
+
+
+

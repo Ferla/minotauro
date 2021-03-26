@@ -1,0 +1,24 @@
+<h1>Listing tasassimulaciones</h1>
+
+<table>
+  <tr>
+    <th>Anno</th>
+    <th>Mes</th>
+    <th>Tasa</th>
+  </tr>
+
+<% @tasassimulaciones.each do |tasassimulacion| %>
+  <tr>
+    <td><%=h tasassimulacion.anno %></td>
+    <td><%=h tasassimulacion.mes %></td>
+    <td><%=h tasassimulacion.tasa %></td>
+    <td><%= link_to 'Show', tasassimulacion %></td>
+    <td><%= link_to 'Edit', edit_tasassimulacion_path(tasassimulacion) %></td>
+    <td><%= link_to 'Destroy', tasassimulacion, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tasassimulacion', new_tasassimulacion_path %>

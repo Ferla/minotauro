@@ -1,0 +1,24 @@
+<h1>Editing tiposestado</h1>
+
+<% form_for(@tiposestado) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :clasificacion %><br />
+    <%= f.text_field :clasificacion %>
+  </p>
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.label :estado %><br />
+    <%= f.text_field :estado %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @tiposestado %> |
+<%= link_to 'Back', tiposestados_path %>

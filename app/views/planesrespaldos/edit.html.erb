@@ -1,0 +1,96 @@
+<h1>Editing planesrespaldo</h1>
+
+<% form_for(@planesrespaldo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :planesrecaudo_id %><br />
+    <%= f.text_field :planesrecaudo_id %>
+  </p>
+  <p>
+    <%= f.label :personasobligacion_id %><br />
+    <%= f.text_field :personasobligacion_id %>
+  </p>
+  <p>
+    <%= f.label :persona_id %><br />
+    <%= f.text_field :persona_id %>
+  </p>
+  <p>
+    <%= f.label :nro_cuota %><br />
+    <%= f.text_field :nro_cuota %>
+  </p>
+  <p>
+    <%= f.label :cuota %><br />
+    <%= f.text_field :cuota %>
+  </p>
+  <p>
+    <%= f.label :cuota_ori %><br />
+    <%= f.text_field :cuota_ori %>
+  </p>
+  <p>
+    <%= f.label :fecha_vence %><br />
+    <%= f.date_select :fecha_vence %>
+  </p>
+  <p>
+    <%= f.label :inicial %><br />
+    <%= f.text_field :inicial %>
+  </p>
+  <p>
+    <%= f.label :inicial_ori %><br />
+    <%= f.text_field :inicial_ori %>
+  </p>
+  <p>
+    <%= f.label :amortiza %><br />
+    <%= f.text_field :amortiza %>
+  </p>
+  <p>
+    <%= f.label :amortiza_ori %><br />
+    <%= f.text_field :amortiza_ori %>
+  </p>
+  <p>
+    <%= f.label :corriente %><br />
+    <%= f.text_field :corriente %>
+  </p>
+  <p>
+    <%= f.label :corriente_ori %><br />
+    <%= f.text_field :corriente_ori %>
+  </p>
+  <p>
+    <%= f.label :final %><br />
+    <%= f.text_field :final %>
+  </p>
+  <p>
+    <%= f.label :final_ori %><br />
+    <%= f.text_field :final_ori %>
+  </p>
+  <p>
+    <%= f.label :mora %><br />
+    <%= f.text_field :mora %>
+  </p>
+  <p>
+    <%= f.label :diasmora %><br />
+    <%= f.text_field :diasmora %>
+  </p>
+  <p>
+    <%= f.label :moraacum %><br />
+    <%= f.text_field :moraacum %>
+  </p>
+  <p>
+    <%= f.label :morapendiente %><br />
+    <%= f.text_field :morapendiente %>
+  </p>
+  <p>
+    <%= f.label :fecha_pago %><br />
+    <%= f.date_select :fecha_pago %>
+  </p>
+  <p>
+    <%= f.label :valor_pagar %><br />
+    <%= f.text_field :valor_pagar %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @planesrespaldo %> |
+<%= link_to 'Back', planesrespaldos_path %>

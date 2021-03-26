@@ -1,0 +1,20 @@
+<h1>Editing oficina</h1>
+
+<% form_for(@oficina) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :municipio_id %><br />
+    <%= f.text_field :municipio_id %>
+  </p>
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @oficina %> |
+<%= link_to 'Back', oficinas_path %>

@@ -1,0 +1,38 @@
+<p>
+  <b>Radicado:</b>
+  <%=h @proceso.radicado %>
+</p>
+
+<p>
+  <b>Cui:</b>
+  <%=h @proceso.cui %>
+</p>
+
+<p>
+  <b>Delito:</b>
+  <%=h @proceso.delito %>
+</p>
+
+<p>
+  <b>Bien:</b>
+  <%=h @proceso.bien %>
+</p>
+
+<p>
+  <b>Fecha ingreso:</b>
+  <%=h @proceso.fecha_ingreso %>
+</p>
+
+<p>
+  <b>Fecha salida:</b>
+  <%=h @proceso.fecha_salida %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%=h @proceso.estado %>
+</p>
+
+
+<%= link_to 'Edit', edit_proceso_path(@proceso) %> |
+<%= link_to 'Back', procesos_path %>

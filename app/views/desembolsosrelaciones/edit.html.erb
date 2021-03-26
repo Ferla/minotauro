@@ -1,0 +1,24 @@
+<h1>Editing desembolsosrelacion</h1>
+
+<% form_for(@desembolsosrelacion) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :desembolsospersona %><br />
+    <%= f.text_field :desembolsospersona %>
+  </p>
+  <p>
+    <%= f.label :persona %><br />
+    <%= f.text_field :persona %>
+  </p>
+  <p>
+    <%= f.label :personasobligacion %><br />
+    <%= f.text_field :personasobligacion %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @desembolsosrelacion %> |
+<%= link_to 'Back', desembolsosrelaciones_path %>

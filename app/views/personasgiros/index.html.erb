@@ -1,0 +1,50 @@
+<h1>Listing personasgiros</h1>
+
+<table>
+  <tr>
+    <th>Persona</th>
+    <th>Obligacion</th>
+    <th>Fecha aprobacion credito</th>
+    <th>Fondo recursos</th>
+    <th>Modalidad</th>
+    <th>Fecha leg ren</th>
+    <th>Fecha giro</th>
+    <th>Valor giro</th>
+    <th>Entidad que gira</th>
+    <th>Soporte giro</th>
+    <th>Beneficiario giro</th>
+    <th>Es giro adicional</th>
+    <th>Estado actual</th>
+    <th>Motivo estado</th>
+    <th>Fecha inicio estado</th>
+    <th>Fecha finalizacion estado</th>
+  </tr>
+
+<% @personasgiros.each do |personasgiro| %>
+  <tr>
+    <td><%=h personasgiro.persona_id %></td>
+    <td><%=h personasgiro.obligacion %></td>
+    <td><%=h personasgiro.fecha_aprobacion_credito %></td>
+    <td><%=h personasgiro.fondo_recursos %></td>
+    <td><%=h personasgiro.modalidad %></td>
+    <td><%=h personasgiro.fecha_leg_ren %></td>
+    <td><%=h personasgiro.fecha_giro %></td>
+    <td><%=h personasgiro.valor_giro %></td>
+    <td><%=h personasgiro.entidad_que_gira %></td>
+    <td><%=h personasgiro.soporte_giro %></td>
+    <td><%=h personasgiro.beneficiario_giro %></td>
+    <td><%=h personasgiro.es_giro_adicional %></td>
+    <td><%=h personasgiro.estado_actual %></td>
+    <td><%=h personasgiro.motivo_estado %></td>
+    <td><%=h personasgiro.fecha_inicio_estado %></td>
+    <td><%=h personasgiro.fecha_finalizacion_estado %></td>
+    <td><%= link_to 'Show', personasgiro %></td>
+    <td><%= link_to 'Edit', edit_personasgiro_path(personasgiro) %></td>
+    <td><%= link_to 'Destroy', personasgiro, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New personasgiro', new_personasgiro_path %>

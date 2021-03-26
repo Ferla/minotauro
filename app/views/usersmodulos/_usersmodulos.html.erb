@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h3>Modulos</h3>
+</div>
+<% remote_form_for [@user, @usersmodulo] do |form| %>
+<% if !@usersmodulo.id %>
+	<%= render :partial => "/usersmodulos/usersmodulos_form" %>
+<% end %>
+      <div align="center">
+<table class="table table-bordered table-striped">
+  <tr valign="middle">
+    <th width="10%" height="30">Id</th>
+    <th width="35%" height="30">Modulo</th>
+    <th width="50%" height="30">Mensaje</th>
+    <th width="5%" height="30"></th>
+  </tr>
+<% for usersmodulo in @user.usersmodulos.find(:all, :order => 'modulo_id') %>
+   <% if usersmodulo.id != @usersmodulo.id %>
+   <tr id="usersmodulo_<%=usersmodulo.id%>">
+     <td><%=usersmodulo.modulo.id%></td>
+     <td><%=usersmodulo.modulo.descripcion%>  </td>
+     <td><%=usersmodulo.modulo.mensaje%></td>
+     <td>
+      <%= link_to_remote ('Borrar',{:url => user_usersmodulo_path(@user, usersmodulo),
+		:method => :delete, :confirm => "¿Seguro?"},:class=>"btn btn-mini btn-danger")%>
+     </td>
+ </tr>
+   <% end %>
+<% end %>
+</table>
+            <%= hidden_field :user, :id %>
+
+</div>
+<% end %>
+<br/>

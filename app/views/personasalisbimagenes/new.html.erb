@@ -1,0 +1,16 @@
+<div class="page-header"><h3>Alistamiento Juridicial (<%=@personasalisbien.personasalistamiento.persona.autobuscar rescue nil%>)</h3></div>
+<div class="page-header">
+  <h3>Documentos de Soporte - Investigación laboral</h3>
+</div>
+<% form_for(:personasalisbimagen, @personasalisbimagen, :url => personasalisbien_personasalisbimagenes_path(@personasalisbien), :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+<table class="table">
+  <tr width="40%" valign="top">
+    <td><div align="right">
+        <%= f.submit "Guardar Documento Soporte",:disable_with => "Guardando...", :class=>"btn btn-primary"%>
+        <%= link_to 'Regresar al formulario',edit_personasalistamiento_path(@personasalisbien.personasalistamiento_id), :class=>"btn btn-success",:style=>"font-size: 13px;color:#ffffff" %></div>
+      </td>
+  </tr>
+</table>
+<% end %>

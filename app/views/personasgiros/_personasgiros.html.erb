@@ -1,0 +1,93 @@
+<br/><legend>Giros <a href="javascript:void(0);" onclick="SINO('demogir<%=@persona.id%>')"><img src="/images/vermas.png"></img></a></legend>
+<% remote_form_for [@persona, @personasgiro] do |form| %>
+<div id="demogir<%=@persona.id%>" style="display:none;">
+    <% if !@personasgiro.id %>
+       <%#= render :partial => "/personasgiros/personasgiros_form"%>
+    <% end %>
+</div>
+<% if @persona.personasgiros.exists?
+ i = 0
+%>
+<table class="table-striped table-condensed" width="100%">
+  <tr><td colspan="2"><div style="font-size:14px; font-family: Tahoma;" align="left"><strong>Datos Giros</strong></div></td></tr>
+<% for personasgiro in @persona.personasgiros.find(:all, :order => 'updated_at DESC')
+   i = i + 1%>
+   <% if personasgiro.id != @personasgiro.id %>
+    <tr valign="middle" id="ppersonasgiro_<%=personasgiro.id%>">
+     <td width="5%">
+       <table class="table table-bordered table-striped table-hover">
+         <tr>
+           <th><div align="center"><%=i%></div></th>
+         </tr>
+         <tr>
+           <th><div align="center"><%=h personasgiro.beneficiario_giro %></div></th>
+         </tr>
+       </table>
+      </td>
+     <td width="95%">
+        <table class="table table-bordered table-striped table-hover">
+          <tr>
+            <td width="15%"><strong><div align="center">Fecha Aprobación Crédito</div></strong></td>
+            <td width="10%"><strong><div align="center">Fondo Recursos</div></strong></td>
+            <td width="15%"><strong><div align="center">Modalidad</div></strong></td>
+            <td width="15%"><strong><div align="center">Fecha Legalización o Renovación</div></strong></td>
+            <td width="10%"><strong><div align="center">Fecha Giro</div></strong></td>
+            <td width="10%"><strong><div align="center">Valor Giro</div></strong></td>
+            <td width="25%"><strong><div align="center">Entidad que Gira</div></strong></td>
+          </tr>
+          <tr>
+            <td><div align="center"><%=h personasgiro.fecha_aprobacion_credito %></div></td>
+            <td><div align="center"><%=h personasgiro.fondo_recursos %></div></td>
+            <td><div align="center"><%=h personasgiro.modalidad %></div></td>
+            <td><div align="center"><%=h personasgiro.fecha_leg_ren %></div></td>
+            <td><div align="center"><%=h personasgiro.fecha_giro %></div></td>
+            <td><div align="center"><%=h camponumerico(personasgiro.valor_giro) rescue nil %></div></td>
+            <td><div align="center"><%=h personasgiro.entidad_que_gira %></div></td>
+          </tr>
+        </table>
+        <table class="table table-bordered table-striped table-hover">
+          <tr>
+            <td width="10%"><strong><div align="center">Soporte Giro</div></strong></td>
+            <td width="10%"><strong><div align="center">Beneficiario Giro</div></strong></td>
+            <td width="10%"><strong><div align="center">Es Giro Adicional</div></strong></td>
+            <td width="10%"><strong><div align="center">Estado Actual</div></strong></td>
+            <td width="10%"><strong><div align="center">Motivo Estado</div></strong></td>
+            <td width="20%"><strong><div align="center">Fecha Inicio Estado</div></strong></td>
+            <td width="20%"><strong><div align="center">Fecha Finalización Estado</div></strong></td>
+          </tr>
+          <tr>
+            <td><div align="center"><%=h personasgiro.soporte_giro %></div></td>
+            <td><div align="center"><%=h personasgiro.beneficiario_giro %></div></td>
+            <td><div align="center"><%=h personasgiro.es_giro_adicional %></div></td>
+            <td><div align="center"><%=h personasgiro.estado_actual %></div></td>
+            <td><div align="center"><%=h personasgiro.motivo_estado %></div></td>
+            <td><div align="center"><%=h personasgiro.fecha_inicio_estado %></div></td>
+            <td><div align="center"><%=h personasgiro.fecha_finalizacion_estado %></div></td>
+          </tr>
+        </table>
+     </td>
+   </tr>
+<% else %>
+      <%= render :partial => "/personasgiros/personasgiros_form" %>
+      <table class="table table-bordered table-striped">
+<% end %>
+        <% end %>
+</table>
+<% else %>
+<div id="personasgiro">
+    <div class="alert alert-success">No hay datos asociados</div>
+</div>
+<% end %>
+<%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:personasgiro] %>
+<div id="personasgiro">
+    <div class="alert alert-success">
+      <%= flash[:personasgiro] %>
+    </div>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('personasgiro');", 5000)
+</script>
+<% end %>

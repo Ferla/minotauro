@@ -1,0 +1,60 @@
+<h1>Listing planesrespaldos</h1>
+
+<table>
+  <tr>
+    <th>Planesrecaudo</th>
+    <th>Personasobligacion</th>
+    <th>Persona</th>
+    <th>Nro cuota</th>
+    <th>Cuota</th>
+    <th>Cuota ori</th>
+    <th>Fecha vence</th>
+    <th>Inicial</th>
+    <th>Inicial ori</th>
+    <th>Amortiza</th>
+    <th>Amortiza ori</th>
+    <th>Corriente</th>
+    <th>Corriente ori</th>
+    <th>Final</th>
+    <th>Final ori</th>
+    <th>Mora</th>
+    <th>Diasmora</th>
+    <th>Moraacum</th>
+    <th>Morapendiente</th>
+    <th>Fecha pago</th>
+    <th>Valor pagar</th>
+  </tr>
+
+<% @planesrespaldos.each do |planesrespaldo| %>
+  <tr>
+    <td><%=h planesrespaldo.planesrecaudo_id %></td>
+    <td><%=h planesrespaldo.personasobligacion_id %></td>
+    <td><%=h planesrespaldo.persona_id %></td>
+    <td><%=h planesrespaldo.nro_cuota %></td>
+    <td><%=h planesrespaldo.cuota %></td>
+    <td><%=h planesrespaldo.cuota_ori %></td>
+    <td><%=h planesrespaldo.fecha_vence %></td>
+    <td><%=h planesrespaldo.inicial %></td>
+    <td><%=h planesrespaldo.inicial_ori %></td>
+    <td><%=h planesrespaldo.amortiza %></td>
+    <td><%=h planesrespaldo.amortiza_ori %></td>
+    <td><%=h planesrespaldo.corriente %></td>
+    <td><%=h planesrespaldo.corriente_ori %></td>
+    <td><%=h planesrespaldo.final %></td>
+    <td><%=h planesrespaldo.final_ori %></td>
+    <td><%=h planesrespaldo.mora %></td>
+    <td><%=h planesrespaldo.diasmora %></td>
+    <td><%=h planesrespaldo.moraacum %></td>
+    <td><%=h planesrespaldo.morapendiente %></td>
+    <td><%=h planesrespaldo.fecha_pago %></td>
+    <td><%=h planesrespaldo.valor_pagar %></td>
+    <td><%= link_to 'Show', planesrespaldo %></td>
+    <td><%= link_to 'Edit', edit_planesrespaldo_path(planesrespaldo) %></td>
+    <td><%= link_to 'Destroy', planesrespaldo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New planesrespaldo', new_planesrespaldo_path %>

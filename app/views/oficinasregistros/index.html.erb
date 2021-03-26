@@ -1,0 +1,20 @@
+<h1>Listing oficinasregistros</h1>
+
+<table>
+  <tr>
+    <th>Descripcion</th>
+  </tr>
+
+<% @oficinasregistros.each do |oficinasregistro| %>
+  <tr>
+    <td><%=h oficinasregistro.descripcion %></td>
+    <td><%= link_to 'Show', oficinasregistro %></td>
+    <td><%= link_to 'Edit', edit_oficinasregistro_path(oficinasregistro) %></td>
+    <td><%= link_to 'Destroy', oficinasregistro, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New oficinasregistro', new_oficinasregistro_path %>

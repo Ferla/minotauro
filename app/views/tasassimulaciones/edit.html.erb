@@ -1,0 +1,24 @@
+<h1>Editing tasassimulacion</h1>
+
+<% form_for(@tasassimulacion) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :anno %><br />
+    <%= f.text_field :anno %>
+  </p>
+  <p>
+    <%= f.label :mes %><br />
+    <%= f.text_field :mes %>
+  </p>
+  <p>
+    <%= f.label :tasa %><br />
+    <%= f.text_field :tasa %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @tasassimulacion %> |
+<%= link_to 'Back', tasassimulaciones_path %>

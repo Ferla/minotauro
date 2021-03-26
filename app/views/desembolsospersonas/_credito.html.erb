@@ -1,0 +1,136 @@
+<% for desembolsosrelacion in @desembolsospersona.desembolsosrelaciones.find(:all) %>  
+    <legend>Informacion Obligación (<%=Date.today%>)</legend>
+    <table class="table table-bordered table-striped table-hover">
+      <tr>
+        <th><div align="center">Nro Obligacion</div></th>
+        <th><div align="center">Fecha Creación</div></th>
+        <th><div align="center">Tasa Interes PAC</div></th>
+        <th><div align="center">Valor Credito</div></th>
+        <th><div align="center">Valor Otros</div></th>
+        <th><div align="center">Total Financiado</div></th>
+        <th><div align="center">Fch Ult. Pago</div></th>
+        <th><div align="center">Vlr Ult. Pago</div></th>
+      </tr>
+      <tr>
+        <td><div align="center"><a title="Fondo: <%=desembolsosrelacion.personasobligacion.fondo rescue nil%> - PAC: <%=desembolsosrelacion.personasobligacion.pac rescue nil%>"><%=desembolsosrelacion.personasobligacion.nro_obligacion rescue nil %></a></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.created_at.strftime("%Y-%m-%d %X") rescue nil %></div></td>
+        <td><div align="center"><a title="IPC <%=desembolsosrelacion.personasobligacion.tasa_ipc rescue nil%> + <%=desembolsosrelacion.personasobligacion.tasa_puntos rescue nil%>"><%=desembolsosrelacion.personasobligacion.tasa_final rescue nil%> E.A.</a></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.valor) rescue nil%></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.reestruc_vlr_otros_ori) rescue nil%></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.totalfinanciado) rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.fch_ult_pago.strftime("%Y-%m-%d") rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(Planesrecaudo.find(:first, :conditions=>["personasobligacion_id = #{desembolsosrelacion.personasobligacion.id} and fecha_recaudo = '#{desembolsosrelacion.personasobligacion.fch_ult_pago.to_date}'"]).valor) rescue nil%></div></td>
+      </tr>
+    </table>
+    <table class="table table-bordered table-striped table-hover">
+      <tr>
+        <th colspan="5"><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">VENCIDOS</div></th>
+        <th colspan="4"><div style="color:orange; font-size:14px; font-family: Tahoma;" align="center">VIGENTES <%=is_fechahoy.strftime("%m-%Y") rescue nil%></div></th>
+        <th colspan="3"><div style="color:green; font-size:14px; font-family: Tahoma;" align="center">VALORES POR PAGAR</div></th>
+        <th rowspan="2"><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">SALDO TOTAL<br/>DEUDA</div></th>
+      </tr>
+      <tr>
+        <th><div align="center">Capital</div></th>
+        <th><div align="center">Corriente</div></th>
+        <th><div align="center">Otros</div></th>
+        <th><div align="center">Mora</div></th>
+        <th><div align="center">Total</div></th>
+        <th><div align="center">Capital</div></th>
+        <th><div align="center">Corriente</div></th>
+        <th><div align="center">Otros</div></th>
+        <th><div align="center">Total</div></th>
+        <th><div align="center">Capital</div></th>
+        <th><div align="center">Otros</div></th>
+        <th><div align="center">Total</div></th>
+      </tr>
+      <tr>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.saldocapitalvencido) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.saldointerescorriente) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.saldootros) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.saldointeresmora) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.totalvencido) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.vlrcuotacapital) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.vlrcuotacorriente) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.vlrcuotaotros) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.vlrcuota) rescue nil %></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.capitalporpagar) rescue nil%></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.otrosporpagar) rescue nil%></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.totalporpagar) rescue nil%></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.saldototaldeuda) rescue nil%></div></td>
+      </tr>
+    </table>
+    <table class="table table-bordered table-striped table-hover">
+      <tr>
+        <th rowspan="3"><div style="color:red; font-size:13px; font-family: Tahoma;" align="center">Analista de Cartera:<br/><br/>
+          <%=User.find(desembolsosrelacion.personasobligacion.userresponsable_id).nombre rescue nil%></div></th>
+        <th colspan="5"><div align="center">Contadores</div></th>
+        <th colspan="3"><div align="center">Estado del Credito</div></th>              
+      </tr>
+      <tr>
+        <th><div align="center">Plazo</div></th>
+        <th><div align="center">Altura</div></th>
+        <th><div align="center">Pagadas</div></th>
+        <th><div align="center">En Mora</div></th>
+        <th><div align="center">Por Facturar</div></th>
+        <th><div align="center">Dias Vencidos</div></th>
+        <th><div align="center">Calificación Cartera</div></th>
+        <th><div align="center">Estado Obligacion</div></th>
+      </tr>
+      <tr>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.obplazo rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.obaltura rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.obcuotaspagadas rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.obcuotasmora rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.obcuotasporpagar rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.diasvencoblig rescue nil%></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.calificacion rescue nil%></div></td>
+        <td><div style="color:red; font-size:16px; font-family: Tahoma;" align="center"><strong><%=desembolsosrelacion.personasobligacion.estadoobli rescue nil%></strong></div></td>
+      </tr>
+    </table>
+
+    <table class="table table-bordered table-striped table-hover">
+        <tr valign="middle">
+          <th><div align="center">#</div></th>
+          <th><div align="center">Fecha<br/>vence</div></th>
+          <th><div align="center">Inicial</div></th>
+          <th><div align="center">Cuota</div></th>
+          <th><div align="center">Cuota<br/>Ori</div></th>
+          <th><div align="center">Pendiente<br/>Amortizacion</div></th>
+          <th><div align="center">Amortiza<br/>Ori</div></th>
+          <th><div align="center">Corriente</div></th>
+          <th><div align="center">Corriente<br/>Ori</div></th>
+          <th><div align="center">Final</div></th>
+          <th><div align="center">Final<br/>Ori</div></th>
+          <% if Planesobligacion.exists?(["personasobligacion_id = #{desembolsosrelacion.personasobligacion.id} and otros > 0"]) == true %>
+          <th><div align="center">Otros</div></th>
+          <% end %>
+          <th><div align="center">Valores Pendientes<br/>Cuota</div></th>
+          <th><div align="center">#</div></th>
+        </tr>
+      <% for planesobligacion in desembolsosrelacion.personasobligacion.planesobligaciones.find(:all, :order => 'nro_cuota asc')%>  
+        <tr valign="middle">
+          <td><div align="center"><%=planesobligacion.nro_cuota%></div></td>
+          <td><div align="center"><%=planesobligacion.fecha_vence.strftime("%Y-%m-%d") %></div></td>
+          <td><div align="right"><strong><%=camponumerico(planesobligacion.inicial) %></strong></div></td>
+          <td><div align="right"><strong><%=camponumerico(planesobligacion.cuota) %></strong></div></td>
+          <td><div align="right"><%=camponumerico(planesobligacion.cuota_ori) %></div></td>
+          <td><div align="right"><strong><%=camponumerico(planesobligacion.amortiza) %></strong></div></td>
+          <td><div align="right"><%=camponumerico(planesobligacion.amortiza_ori) %></div></td>
+          <td><div align="right"><strong><%=camponumerico(planesobligacion.corriente) %></strong></div></td>
+          <td><div align="right"><%=camponumerico(planesobligacion.corriente_ori) %></div></td>
+          <td><% if planesobligacion.final != planesobligacion.final_ori and planesobligacion.fecha_vence <= is_fechahoy%>
+                <div style="color:red; font-family: Tahoma;" align="right">
+                 <strong><a title="Extraordinario" style="color:red; font-family: Tahoma;"><%=camponumerico(planesobligacion.final) %></a></strong></div>
+              <% else %>
+                <div align="right"><strong><%=camponumerico(planesobligacion.final) %></strong></div>
+              <% end %></td>
+          <td><div align="right"><%=camponumerico(planesobligacion.final_ori) %></div></td>
+          <% if Planesobligacion.exists?(["personasobligacion_id = #{desembolsosrelacion.personasobligacion.id} and otros > 0"]) == true %>
+          <td><div align="right"><%=camponumerico(planesobligacion.otros) %></div></td>
+          <% end %>
+          <td><div align="right"><%=camponumerico(planesobligacion.valor_pagar) %></div></td>
+          <td><div align="center"><%=planesobligacion.nro_cuota%></div></td>
+        </tr>
+      <% end %>
+      </table>    
+<% end %>

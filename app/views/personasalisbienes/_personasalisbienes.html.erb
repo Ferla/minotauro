@@ -1,0 +1,102 @@
+<legend>Investigación de Bienes</legend>
+<% remote_form_for [@personasalistamiento, @personasalisbien] do |form| %>
+    <% if !@personasalisbien.id %>
+       <%# if permiso("personasalisbien","C").to_s == "S" %>
+        <%= render :partial => "/personasalisbienes/personasalisbienes_form" %>
+       <%# end %>
+    <% end %>
+<% if @personasalistamiento.personasalisbienes.exists? %>
+<table class="table table-bordered table-striped table-hover">
+  <tr valign="middle">
+    <th width="5%"></th>
+    <th width="15%">Fecha</th>
+    <th width="10%">Clase</th>
+    <th width="70%">Datos</th>
+  </tr>
+<% for personasalisbien in @personasalistamiento.personasalisbienes.find(:all, :order => 'created_at DESC') %>
+   <% if personasalisbien.id != @personasalisbien.id %>
+   <tr id="personasalisbien_<%=personasalisbien.id%>">
+     <td>
+         <%# if permiso("personasalisbien","A").to_s == "S" %>
+          <%= link_to_remote(image_tag("editar.png", :title => "Editar"),{:url => edit_personasalistamiento_personasalisbien_path(@personasalistamiento, personasalisbien),:method => :get})%>
+         <%# end %>
+         <%# if permiso("personasalisbien","E").to_s == "S" %>
+          <%= link_to_remote(image_tag("borrar.png", :title => "Eliminar"),{:url => personasalistamiento_personasalisbien_path(@personasalistamiento, personasalisbien),
+		:method => :delete, :confirm => "¿Seguro?"})%>
+          <%= link_to image_tag("images.png", :title => "Imagenes"),{:controller=>"personasalisbimagenes", :action=>"new", :personasalisbien_id=>personasalisbien.id}%>
+         <%# end %>
+      </td>
+     <td><%=h personasalisbien.updated_at.strftime("%Y-%m-%d %X")%><br/>
+         <%=h personasalisbien.user.username rescue nil%></td>
+     <td><%=h personasalisbien.clase %></td>
+     <td>
+       <table class="table table-bordered table-striped table-hover">
+          <tr valign="middle">
+            <td width="30%"><strong>Oficina Registro : </strong></td>
+            <td width="70%"><%=h personasalisbien.oficina.munic rescue nil%></td>
+          </tr>
+          <tr valign="middle">
+            <td><strong>Matricula Inmobiliaria : </strong></td>
+            <td><%=h personasalisbien.matricula rescue nil%></td>
+          </tr>
+          <tr valign="middle">
+            <td><strong>Direccion : </strong></td>
+            <td><%=h personasalisbien.direccion rescue nil%></td>
+          </tr>
+          <tr valign="middle">
+            <td><strong>Municipio - Departamento : </strong></td>
+            <td><%=h personasalisbien.municipio.descripcion rescue nil%></td>
+          </tr>
+          <tr valign="middle">
+            <td><strong>Suceptible a embargo : </strong></td>
+            <td><div align="justify"><%=h personasalisbien.analisis rescue nil%></div></td>
+          </tr>
+          <tr valign="middle">
+            <td><strong>Viable : </strong></td>
+            <td><%=h personasalisbien.valida rescue nil%></td>
+          </tr>
+       </table>
+        <% if  personasalisbien.personasalisbimagenes.exists? %>
+            <table class="table table-bordered table-striped">
+              <tr valign="middle">
+                <td colspan="3"><strong>Soporte Digital</strong></td>
+              </tr>
+            <% for personasalisbimagen in personasalisbien.personasalisbimagenes.find(:all,:order => 'created_at DESC') %>
+               <tr  valign="middle" class="personasalisbimagen_<%=personasalisbimagen.id%>">
+                 <td width="10%"><div align="center">
+                      <%= link_to image_tag("buscar.png", :title => "Ver"), personasalisbimagen.peralisbien.url(:original, false),{ :popup => ['new_window','height=450,width=600,scrollbars=yes']}%>
+                      <%= link_to_remote(image_tag("borrar.png", :title => "Eliminar"),{:url => personasalisbien_personasalisbimagen_path(personasalisbien, personasalisbimagen),
+                              :method => :delete, :confirm => "¿Seguro?",:before => "$(this).up('.personasalisbimagen_#{personasalisbimagen.id}').remove()"})%>
+                 </div></td>
+                 <td width="45%"><%=personasalisbimagen.descripcion rescue nil%></td>
+                 <td width="45%"><%=personasalisbimagen.peralisbien_file_name rescue nil%></td>
+               </tr>
+            <% end %>
+            </table>
+        <% end %>
+     </td>
+   </tr>
+<% else %>
+      <%= render :partial => "/personasalisbienes/personasalisbienes_form" %>
+      <table class="table table-bordered table-striped">
+<% end %>
+        <% end %>
+</table>
+<% else %>
+<div id="personasalisbien">
+    <div class="alert alert-success">No hay datos asociados</div>
+</div>
+<% end %>
+<%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:personasalisbien] %>
+<div id="personasalisbien">
+    <div class="alert alert-success">
+      <%= flash[:personasalisbien] %>
+    </div>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('personasalisbien');", 5000)
+</script>
+<% end %>

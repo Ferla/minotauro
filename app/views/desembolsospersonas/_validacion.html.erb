@@ -1,0 +1,59 @@
+<% for desembolsosrelacion in @desembolsospersona.desembolsosrelaciones.find(:all)
+   tasamessimula = desembolsosrelacion.personasobligacion.fecha_matricula.strftime("%Y%m") rescue nil
+ %>  
+    <legend>Validación Obligación</legend>
+    <table class="table table-bordered table-striped table-hover">
+      <tr>
+        <th><div align="center">Nro Obligacion</div></th>
+        <th><div align="center">Fecha Creación</div></th>
+        <th><div align="center">Tasa Interes PAC</div></th>
+        <th><div align="center">Valor Credito</div></th>
+      </tr>
+      <tr>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.nro_obligacion rescue nil %></div></td>
+        <td><div align="center"><%=desembolsosrelacion.personasobligacion.created_at.strftime("%Y-%m-%d %X") rescue nil %></div></td>
+        <td><div align="center"><a title="IPC <%=desembolsosrelacion.personasobligacion.tasa_ipc rescue nil%> + <%=desembolsosrelacion.personasobligacion.tasa_puntos rescue nil%>"><%=desembolsosrelacion.personasobligacion.tasa_final rescue nil%> E.A.</a></div></td>
+        <td><div align="center">$ <%=camponumerico(desembolsosrelacion.personasobligacion.valor) rescue nil%></div></td>
+      </tr>
+    </table>
+    <table class="table table-bordered table-striped table-hover">
+      <tr valign="middle">
+        <th rowspan="2"><div align="center">#</div></th>
+        <th rowspan="2"><div align="center">Fecha vence</div></th>
+        <th colspan="4"><div align="center"><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">ESCENARIO INICIAL (<%=desembolsosrelacion.personasobligacion.tasa_final rescue nil%> E.A.)</div></div></th>
+        <th colspan="4"><div align="center"><div style="color:orange; font-size:14px; font-family: Tahoma;" align="center">ESCENARIO SIMULADO ( 
+          <%=Tasassimulacion.find(:first, :conditions=>["anno||mes = '#{tasamessimula}'"]).tasa rescue nil%> E.A.)</div></div></th>
+      </tr>
+      <tr valign="middle">                
+        <th><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">Inicial</div></th>
+        <th><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">Cuota</div></th>
+        <th><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">Capital</div></th>
+        <th><div style="color:red; font-size:14px; font-family: Tahoma;" align="center">Corriente</div></th>
+        <th><div style="color:orange; font-size:14px; font-family: Tahoma;" align="center">Inicial</div></th>
+        <th><div style="color:orange; font-size:14px; font-family: Tahoma;" align="center">Cuota</div></th>
+        <th><div style="color:orange; font-size:14px; font-family: Tahoma;" align="center">Capital</div></th>
+        <th><div style="color:orange; font-size:14px; font-family: Tahoma;" lign="center">Corriente</div></th>
+      </tr>
+<%    cadena = "select c.nro_cuota, c.fecha_vence, c.inicial, c.cuota, c.amortiza, c.corriente, s.inicial ini2, s.cuota cuo2, s.amortiza amo2, s.corriente cor2
+                from   desembolsoscreditos c, desembolsossimulaciones s
+                where  c.desembolsosrelacion_id = #{desembolsosrelacion.id}
+                and    c.desembolsosrelacion_id = s.desembolsosrelacion_id
+                and    c.nro_cuota = s.nro_cuota
+                order by c.nro_cuota asc"
+%>      
+    <% for p in Objeto.find_by_sql([cadena]) %>  
+      <tr valign="middle">
+        <td><div align="center"><%=p.nro_cuota%></div></td>
+        <td><div align="center"><%=p.fecha_vence.strftime("%Y-%m-%d") %></div></td>
+        <td><div align="right"><%=camponumerico(p.inicial) %></div></td>
+        <td><div align="right"><%=camponumerico(p.cuota) %></div></td>
+        <td><div align="right"><%=camponumerico(p.amortiza) %></div></td>
+        <td><div align="right"><%=camponumerico(p.corriente) %></div></td>
+        <td><div align="right"><strong><%=camponumerico(p.ini2) %></strong></div></td>
+        <td><div align="right"><strong><%=camponumerico(p.cuo2) %></strong></div></td>
+        <td><div align="right"><strong><%=camponumerico(p.amo2) %></strong></div></td>
+        <td><div align="right"><strong><%=camponumerico(p.cor2) %></strong></div></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

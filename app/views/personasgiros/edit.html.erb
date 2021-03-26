@@ -1,0 +1,76 @@
+<h1>Editing personasgiro</h1>
+
+<% form_for(@personasgiro) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :persona_id %><br />
+    <%= f.text_field :persona_id %>
+  </p>
+  <p>
+    <%= f.label :obligacion %><br />
+    <%= f.text_field :obligacion %>
+  </p>
+  <p>
+    <%= f.label :fecha_aprobacion_credito %><br />
+    <%= f.text_field :fecha_aprobacion_credito %>
+  </p>
+  <p>
+    <%= f.label :fondo_recursos %><br />
+    <%= f.text_field :fondo_recursos %>
+  </p>
+  <p>
+    <%= f.label :modalidad %><br />
+    <%= f.text_field :modalidad %>
+  </p>
+  <p>
+    <%= f.label :fecha_leg_ren %><br />
+    <%= f.text_field :fecha_leg_ren %>
+  </p>
+  <p>
+    <%= f.label :fecha_giro %><br />
+    <%= f.text_field :fecha_giro %>
+  </p>
+  <p>
+    <%= f.label :valor_giro %><br />
+    <%= f.text_field :valor_giro %>
+  </p>
+  <p>
+    <%= f.label :entidad_que_gira %><br />
+    <%= f.text_field :entidad_que_gira %>
+  </p>
+  <p>
+    <%= f.label :soporte_giro %><br />
+    <%= f.text_field :soporte_giro %>
+  </p>
+  <p>
+    <%= f.label :beneficiario_giro %><br />
+    <%= f.text_field :beneficiario_giro %>
+  </p>
+  <p>
+    <%= f.label :es_giro_adicional %><br />
+    <%= f.text_field :es_giro_adicional %>
+  </p>
+  <p>
+    <%= f.label :estado_actual %><br />
+    <%= f.text_field :estado_actual %>
+  </p>
+  <p>
+    <%= f.label :motivo_estado %><br />
+    <%= f.text_field :motivo_estado %>
+  </p>
+  <p>
+    <%= f.label :fecha_inicio_estado %><br />
+    <%= f.text_field :fecha_inicio_estado %>
+  </p>
+  <p>
+    <%= f.label :fecha_finalizacion_estado %><br />
+    <%= f.text_field :fecha_finalizacion_estado %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @personasgiro %> |
+<%= link_to 'Back', personasgiros_path %>

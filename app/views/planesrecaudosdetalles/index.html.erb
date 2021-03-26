@@ -1,0 +1,24 @@
+<h1>Listing planesrecaudosdetalles</h1>
+
+<table>
+  <tr>
+    <th>Planrecaudo</th>
+    <th>Tipo</th>
+    <th>Valor aplicado</th>
+  </tr>
+
+<% @planesrecaudosdetalles.each do |planesrecaudosdetalle| %>
+  <tr>
+    <td><%=h planesrecaudosdetalle.planrecaudo_id %></td>
+    <td><%=h planesrecaudosdetalle.tipo %></td>
+    <td><%=h planesrecaudosdetalle.valor_aplicado %></td>
+    <td><%= link_to 'Show', planesrecaudosdetalle %></td>
+    <td><%= link_to 'Edit', edit_planesrecaudosdetalle_path(planesrecaudosdetalle) %></td>
+    <td><%= link_to 'Destroy', planesrecaudosdetalle, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New planesrecaudosdetalle', new_planesrecaudosdetalle_path %>

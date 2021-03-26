@@ -1,0 +1,51 @@
+<div class="form-horizontal well">
+  <table width="100%">
+    <tr valign="middle">
+      <th width="30%"><div align="left">Clase *</div></th>
+      <th width="20%"><div align="left">Fecha investigación *</div></th>
+      <th width="35%"><div align="left">Oficina Registro *</div></th>
+      <th width="15%"><div align="left">Matricula Inmobiliaria *</div></th>
+    </tr>
+   <tr valign="top">
+      <td><%= select(:personasalisbien,:clase, select_clasedeudor, {:include_blank => true }, { :style=>"width:250px"})%>
+      <%= error_message_on :personasalisbien, :clase, :css_class =>"cerror"%></td>
+     <td><%= calendar_date_select "personasalisbien", "fecha_inv", :year_range =>[2015,2018], :class=> "span2_1", :time => false, :onfocus=>"this.blur()"%>
+      <%= error_message_on :personasobligacion, :fecha_inv, :css_class =>"cerror"%></td>
+      <td><%=select("personasalisbien", "oficina_id", select_oficinaregistro.collect {|p| [ p.munic, p.id ] }, { :include_blank => true },
+            { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :personasalisbien, :oficina_id, :css_class =>"cerror"%></td>
+     <td><%= text_field :personasalisbien, :matricula,{ :class => "span2",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisbien, :matricula, :css_class =>"cerror"%></td>
+   </tr>
+  </table>
+  <table width="100%">
+    <tr valign="middle">
+      
+      <th width="40%"><div align="left">Direccion *</div></th>
+      <th width="40%"><div align="left">Municipio - Departamento *</div></th>
+    </tr>
+   <tr valign="top">
+      <td><%= text_field :personasalisbien, :direccion,{ :class => "span5",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisbien, :direccion, :css_class =>"cerror"%></td>
+      <td><%=select("personasalisbien", "municipio_id", select_municipio.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+            { :style=>"width:450px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :personasalisbien, :municipio_id, :css_class =>"cerror"%></td>
+   </tr>
+  </table>
+  <table width="100%">
+    <tr valign="middle">
+      <th width="50%"><div align="left">Suceptible a embargo *</div></th>
+      <th width="25%"><div align="left">Viable *</div></th>
+      <th width="25%"><div align="left"></div></th>
+    </tr>
+   <tr valign="top">
+      <td><%=text_area(:personasalisbien, :analisis, :class=>"input-xxlarge", :rows=>"5", :maxlength => 3999, :onChange=> "javascript:this.value=this.value.toUpperCase();") %>
+      <%= error_message_on :personasalisbien, :analisis, :css_class =>"cerror"%></td>
+      <td><%= select(:personasalisbien,:valida, select_sino, {:include_blank => true }, { :style=>"width:150px"})%>
+      <%= error_message_on :personasalisbien, :valida, :css_class =>"cerror"%></td>
+      <td ><div align="center">
+          <%= hidden_field :personasalisbien, :id %><%= submit_tag "Guardar gestion", :class=>"btn btn-primary"%>
+    </div></td>
+    </tr>
+  </table>
+</div>

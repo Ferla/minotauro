@@ -1,0 +1,23 @@
+<h1>New planesrecaudosdetalle</h1>
+
+<% form_for(@planesrecaudosdetalle) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :planrecaudo_id %><br />
+    <%= f.text_field :planrecaudo_id %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.text_field :tipo %>
+  </p>
+  <p>
+    <%= f.label :valor_aplicado %><br />
+    <%= f.text_field :valor_aplicado %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', planesrecaudosdetalles_path %>

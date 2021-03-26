@@ -1,0 +1,31 @@
+<legend>Detalle</legend>
+<table class="table table-bordered table-striped">
+  <tr valign="middle">
+    <th width="5%"></th>
+    <th>Fondo</th>
+    <th>Fondo2</th>
+    <th>Convocatoria</th>
+    <th>Estado credito</th>
+    <th>Programa</th>
+    <th>Vigencia</th>
+    <th>Tipo beneficio</th>
+    <th>Total desembolsado</th>
+  </tr>
+<% for desembolso in @desembolsospersona.desembolsos.find(:all, :order => 'vigencia DESC') %>
+  <tr>
+    <td><div align="center"><%= link_to image_tag("texto.png", :title => "Ver más información"), visualizar_desembolsos_path(:id=>desembolso.id), :popup => ['new_window','height=600,width=900,scrollbars=yes']%></div></td>
+    <td><div align="center"><%=desembolso.fondo rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.fondo2 rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.convocatoria rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.estado_credito rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.pregrado_programa rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.vigencia rescue nil%></div></td>
+    <td><div align="center"><%=desembolso.tipo_beneficio rescue nil%></div></td>
+    <td><div align="right"><%=camponumerico desembolso.total_desembolsado rescue nil%></div></td>
+  </tr>
+<%end%>  
+  <tr>
+    <td colspan="8"><div align="right"><strong>TOTAL DESEMBOLSADO</strong></div></td>
+    <td><div align="right"><strong><%=camponumerico @desembolsospersona.desembolsos.sum("total_desembolsado") rescue nil%></strong></div></td>
+  </tr>
+</table>

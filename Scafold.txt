@@ -1,0 +1,86 @@
+rake db:migrate
+rake db:migrate RAILS_ENV="production"
+
+rake db:migrate:down version=20170225175444
+
+
+ruby script/generate scaffold tiposcontrol descripcion:string dias:integer dias_clase:string
+
+ruby script/generate scaffold control persona:references tiposcontrol:references user:references fecha:date fecha_vencimiento:date fecha_realterminacion:date user_marcaterminacion:integer
+
+
+
+ruby script/generate scaffold personascontrol persona:references user:references tipo_atencion:string observacion:string
+
+
+ruby script/generate scaffold desembolso fondo:string
+codigo_k:string
+numero:string
+documento:string
+fondo2:string
+id_solicitud:string
+id_anterior:string
+tipo_documento:string
+documento_anterior:string
+pais_expedicion:string
+convocatoria:string
+estado_credito:string
+observacion:string
+estado_icetex:string
+caracterizacion_credito:string
+nro_resolucion:string
+fecha_resolucion:string
+fecha_acta:string
+ultimo_giro_realizado:string
+genero:string
+pais_nacimiento:string
+dpto_nacimiento:string
+ciudad_nacimiento:string
+comuna:string
+nombre_comuna:string
+puntaje_sisben:string
+fecha_nacimiento:string
+edad:string
+nombre_completo:string
+ies:string
+tipo_ies:string
+pregrado_programa:string
+tipo_pregrado:string
+icfesanno_1999:string
+icfesanno_2000:string
+estrato:string
+direccion_residencia:string
+telefono:string
+celular:string
+correo_electronico:string
+semestres_a_financiar:string
+semestre_ingreso:string
+duracion_programa:string
+giros_realizados:string
+giros_pendientes:string
+tipo_beneficio:string
+vigencia:string
+matricula:stringrake 
+sostenimiento:string
+total_desembolsado:string
+operador_financiero:string
+
+
+ruby script/generate scaffold desembolsospersona documento:string documento_anterior:string nombre_completo:string ies:string persona_id:integer
+
+ruby script/generate scaffold desembolsosrelacion desembolsospersona:references persona:references personasobligacion:references
+
+ruby script/generate scaffold desembolsoscredito desembolsosrelacion:references nro_cuota:integer cuota:integer cuota_ori:integer fecha_vence:date inicial:integer inicial_ori:integer amortiza:integer amortiza_ori:integer corriente:integer corriente_ori:integer final:integer final_ori:integer mora:integer diasmora:integer moraacum:integer morapendiente:integer fecha_pago:date valor_pagar:integer morames:integer moradiasmes:integer otros:integer moramesacum:integer inicial2:integer inicial_ori2:integer amortiza2:integer amortiza_ori2:integer corriente2:integer corriente_ori2:integer final2:integer final_ori2:integer 
+
+ruby script/generate scaffold desembolsossimulacion desembolsosrelacion:references nro_cuota:integer cuota:integer cuota_ori:integer fecha_vence:date inicial:integer inicial_ori:integer amortiza:integer amortiza_ori:integer corriente:integer corriente_ori:integer final:integer final_ori:integer mora:integer diasmora:integer moraacum:integer morapendiente:integer fecha_pago:date valor_pagar:integer morames:integer moradiasmes:integer otros:integer moramesacum:integer
+
+
+desembolsospersona_id
+
+ruby script/generate migration AddAu_to_desembolsos desembolsospersona_id:integer
+
+
+
+ruby script/generate scaffold tasassimulacion anno:string mes:string tasa:decimal
+
+ruby script/generate scaffold personasdemografico persona:references dir_1:string dmun_1:integer dir_2:string dmun_2:integer dir_3:string dmun_3:integer dir_4:string dmun_4:integer dir_5:string dmun_5:integer tel_1:string tel_2:string tel_3:string tel_4:string tel_5:string cor_1:string cor_2:string cor_3:string cor_4:string cor_5:string 

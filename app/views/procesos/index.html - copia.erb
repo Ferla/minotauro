@@ -1,0 +1,104 @@
+<div class="page-header">
+    <h2>Procesos Masivos</h2>
+</div>
+<table class="table table-bordered table-striped">
+  <tr valign="middle" >
+    <td width="80%"><div align="left"><h3>Proceso Mora Masiva</h3></div></td>
+    <td width="20%"><div align="center"><%=link_to 'Generar',{:controller=>"procesos", :action=>"mora"},:class=>"btn btn-success" %></div></td>
+  </tr>
+  <tr valign="middle" >
+    <td><div align="left"><h3>Proceso Factura mes actual</h3></div></td>
+    <td><div align="center"><%=link_to 'Generar',{:controller=>"personas", :action=>"procesofactura"},:class=>"btn btn-success" %></div></td>
+  </tr>
+  <tr valign="middle" >
+    <td><div align="left"><h3>Consolidar Factura mes actual</h3></div></td>
+    <td><div align="center"><%=link_to 'Generar',{:controller=>"personas", :action=>"consolidarfactura"},:class=>"btn btn-success" %></div></td>
+  </tr>
+  <tr valign="middle" >
+    <td><div align="left"><h3>Estado Cartera</h3></div></td>
+    <td><div align="center"><%=link_to 'Generar',{:controller=>"personas", :action=>"informecartera"},:class=>"btn btn-danger" %></div></td>
+  </tr>
+<% if permiso("procesosespecial","A").to_s == "S" %>
+  <tr valign="middle" >
+    <td colspan="2"><div align="left"><h3>Informe Cierre Contable</h3></div>
+    <br/>
+<% form_tag informecontable_personas_path, :method => 'get' do %>
+    <table class="table-striped table-condensed" width="100%">
+      <tr>
+        <th width="25%">Año</th>
+        <th width="25%">Mes</th>
+        <th width="25%">Tipo</th>
+        <th width="25%"></th>
+      </tr>
+      <tr>
+        <td><div align="center">
+            <%= select("ubicacion",
+                    :anno, [ ["2014", "2014"],["2015", "2015"],["2016", "2016"],["2017", "2017"]],
+                           {:prompt => "– SELECCIONE EL AÑO –"},
+                          { :style=>"width:200px" })%>
+            </div>
+          </td>
+        <td><div align="center">
+            <%= select( "ubicacion",
+                    :mes, [ ["ENERO" , "01"],["FEBRERO","02"], ["MARZO", "03"], ["ABRIL" , "04"],
+                      ["MAYO" , "05"],["JUNIO" , "06"],["JULIO", "07"],["AGOSTO","08"],
+                      ["SEPTIEMBRE" , "09"],["OCTUBRE" , "10"],["NOVIEMBRE" , "11"],["DICIEMBRE", "12"]],
+                    {:prompt => "– SELECCIONE EL MES –"},
+                    { :style=>"width:200px" })%>
+          </div>
+        </td>
+          <td><div align="center">
+             <%= select("ubicacion",:tipo, [ ["CONSOLIDADO" , "CONSOLIDADO"],["PRUEBA" , "PRUEBA"]],
+                        {:prompt => "– SELECCIONE EL TIPO –"},{ :style=>"width:200px" })%>
+            </div>
+          </td>
+          <td><div align="center">
+         <%= submit_tag "Generar proceso", :class=>"btn btn-primary" %>
+              </div>
+        </td>
+      </tr>
+    </table>
+    <% end %>
+    </td>
+  </tr>
+<% end %>
+
+<% if permiso("procesosespecial","A").to_s == "S" %>
+  <tr valign="middle" >
+    <td colspan="2"><div align="left"><h3>Mora por fecha</h3></div>
+    <br/>
+<% form_tag morafecha_procesos_path, :method => 'get' do %>
+    <table class="table-striped table-condensed" width="100%">
+      <tr>
+        <th width="25%">Seleccione la fecha</th>
+        <th width="25%">.</th>
+      </tr>
+      <tr>
+        <td><div align="center">
+            <%= calendar_date_select "ubicacion", "fch", :year_range => 50.years.ago..0.years.ago, :class=> "span2_1", :size => 10, :time => false, :onfocus=>"this.blur()"%>
+            </div>
+          </td>
+          <td><div align="center">
+         <%= submit_tag "Generar Mora", :class=>"btn btn-primary" %>
+              </div>
+        </td>
+      </tr>
+    </table>
+    <% end %>
+    <br/>
+    <strong>Ultimas Moras generadas</strong><br/>
+    <% @recordaciones = Recordacion.find(:all,:limit=>4,:order=>"id desc")
+       @recordaciones.each do |recordacion|
+    %>
+       <%=recordacion.fecha rescue nil%> - <%=recordacion.descripcion rescue nil%><br/>
+    <% end %>
+
+    </td>
+  </tr>
+<% end %>
+</table>
+
+
+
+    
+

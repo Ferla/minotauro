@@ -1,0 +1,56 @@
+<div class="form-horizontal well">
+  <table width="100%">
+    <tr valign="middle">
+      <th width="20%"><div align="left">Matricula Inmobiliaria *</div></th>
+      <th width="80%"><div align="left">Propietario actual *</div></th>
+    </tr>
+   <tr valign="top">
+     <td><%= text_field :personasalisasociado, :matricula,{ :class => "span2",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisasociado, :matricula, :css_class =>"cerror"%></td>
+     <td><%= text_field :personasalisasociado, :identificacion,{ :class => "span2",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisasociado, :identificacion, :css_class =>"cerror"%>
+     <%= text_field :personasalisasociado, :nombre,{ :class => "span5",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisasociado, :nombre, :css_class =>"cerror"%>
+     </td>
+   </tr>
+  </table>
+  <table width="100%">
+    <tr valign="middle">      
+      <th width="40%"><div align="left">Direccion *</div></th>
+      <th width="45%"><div align="left">Municipio - Departamento *</div></th>
+      <th width="15%"><div align="left">Nro escritura publica *</div></th>
+    </tr>
+   <tr valign="top">
+      <td><%= text_field :personasalisasociado, :direccion,{ :class => "span4",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisasociado, :direccion, :css_class =>"cerror"%></td>
+      <td><%=select("personasalisasociado", "municipio_id", select_municipio.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+            { :style=>"width:450px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :personasalisasociado, :municipio_id, :css_class =>"cerror"%></td>
+     <td><%= text_field :personasalisasociado, :nro_escritura,{ :class => "span2",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personasalisasociado, :nro_escritura, :css_class =>"cerror"%></td>
+   </tr>
+  </table>
+  <table width="100%">
+    <tr valign="middle">      
+      <th width="25%"><div align="left">Fecha Escritura publica *</div></th>
+      <th width="25%"><div align="left">Notaria *</div></th>
+      <th width="30%"><div align="left">Suceptible a embargo *</div></th>
+      <th width="10%"><div align="left">Viable *</div></th>
+      <th width="10%"><div align="left"></div></th>
+    </tr>
+   <tr valign="top">
+     <td><%= calendar_date_select "personasalisasociado", "fecha_escritura", :year_range =>[2015,2016,2017], :class=> "span2_1", :time => false, :onfocus=>"this.blur()"%>
+      <%= error_message_on :personasalisasociado, :fecha_escritura, :css_class =>"cerror"%></td>
+      <td><%=select("personasalisasociado", "notaria_id", is_select_notaria.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+            { :style=>"width:250px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :personasalisasociado, :municipio_id, :css_class =>"cerror"%></td>
+      <td><%=text_area(:personasalisasociado, :analisis, :class=>"input-xlarge", :rows=>"5", :maxlength => 3999, :onChange=> "javascript:this.value=this.value.toUpperCase();") %>
+      <%= error_message_on :personasalisasociado, :analisis, :css_class =>"cerror"%></td>
+      <td><%= select(:personasalisasociado,:valida, select_sino, {:include_blank => true }, { :style=>"width:100px"})%>
+      <%= error_message_on :personasalisasociado, :valida, :css_class =>"cerror"%></td>
+      <td ><div align="center">
+          <%= hidden_field :personasalisasociado, :id %><%= submit_tag "Guardar", :class=>"btn btn-primary"%>
+    </div></td>
+    </tr>
+  </table>
+</div>

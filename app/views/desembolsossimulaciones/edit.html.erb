@@ -1,0 +1,104 @@
+<h1>Editing desembolsossimulacion</h1>
+
+<% form_for(@desembolsossimulacion) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :desembolsosrelacion %><br />
+    <%= f.text_field :desembolsosrelacion %>
+  </p>
+  <p>
+    <%= f.label :nro_cuota %><br />
+    <%= f.text_field :nro_cuota %>
+  </p>
+  <p>
+    <%= f.label :cuota %><br />
+    <%= f.text_field :cuota %>
+  </p>
+  <p>
+    <%= f.label :cuota_ori %><br />
+    <%= f.text_field :cuota_ori %>
+  </p>
+  <p>
+    <%= f.label :fecha_vence %><br />
+    <%= f.date_select :fecha_vence %>
+  </p>
+  <p>
+    <%= f.label :inicial %><br />
+    <%= f.text_field :inicial %>
+  </p>
+  <p>
+    <%= f.label :inicial_ori %><br />
+    <%= f.text_field :inicial_ori %>
+  </p>
+  <p>
+    <%= f.label :amortiza %><br />
+    <%= f.text_field :amortiza %>
+  </p>
+  <p>
+    <%= f.label :amortiza_ori %><br />
+    <%= f.text_field :amortiza_ori %>
+  </p>
+  <p>
+    <%= f.label :corriente %><br />
+    <%= f.text_field :corriente %>
+  </p>
+  <p>
+    <%= f.label :corriente_ori %><br />
+    <%= f.text_field :corriente_ori %>
+  </p>
+  <p>
+    <%= f.label :final %><br />
+    <%= f.text_field :final %>
+  </p>
+  <p>
+    <%= f.label :final_ori %><br />
+    <%= f.text_field :final_ori %>
+  </p>
+  <p>
+    <%= f.label :mora %><br />
+    <%= f.text_field :mora %>
+  </p>
+  <p>
+    <%= f.label :diasmora %><br />
+    <%= f.text_field :diasmora %>
+  </p>
+  <p>
+    <%= f.label :moraacum %><br />
+    <%= f.text_field :moraacum %>
+  </p>
+  <p>
+    <%= f.label :morapendiente %><br />
+    <%= f.text_field :morapendiente %>
+  </p>
+  <p>
+    <%= f.label :fecha_pago %><br />
+    <%= f.date_select :fecha_pago %>
+  </p>
+  <p>
+    <%= f.label :valor_pagar %><br />
+    <%= f.text_field :valor_pagar %>
+  </p>
+  <p>
+    <%= f.label :morames %><br />
+    <%= f.text_field :morames %>
+  </p>
+  <p>
+    <%= f.label :moradiasmes %><br />
+    <%= f.text_field :moradiasmes %>
+  </p>
+  <p>
+    <%= f.label :otros %><br />
+    <%= f.text_field :otros %>
+  </p>
+  <p>
+    <%= f.label :moramesacum %><br />
+    <%= f.text_field :moramesacum %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @desembolsossimulacion %> |
+<%= link_to 'Back', desembolsossimulaciones_path %>

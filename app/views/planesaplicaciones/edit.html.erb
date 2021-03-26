@@ -1,0 +1,24 @@
+<h1>Editing planesaplicacion</h1>
+
+<% form_for(@planesaplicacion) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :plan_id %><br />
+    <%= f.text_field :plan_id %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.text_field :tipo %>
+  </p>
+  <p>
+    <%= f.label :valor %><br />
+    <%= f.text_field :valor %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @planesaplicacion %> |
+<%= link_to 'Back', planesaplicaciones_path %>

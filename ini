@@ -1,0 +1,21 @@
+ruby script/server start
+
+ gem install activerecord-oracle_enhanced-adapter -v 1.3.0 --no-ri --no-rdoc
+ gem install ruby-oci8 -v 2.1.5 --no-ri --no-rdoc
+ gem install afm -v 0.2.2 --no-ri --no-rdoc
+ gem install Ascii85 -v 1.0.2 --no-ri --no-rdoc
+ gem install calendar_date_select -v 1.16.4 --no-ri --no-rdoc
+ gem install cgi_multipart_eof_fix -v 2.5.0 --no-ri --no-rdoc
+ gem install clickatell -v 0.8.2 --no-ri --no-rdoc
+ gem install daemons -v 1.0.10 --no-ri --no-rdoc
+ gem install fastthread -v 1.0.7 --no-ri --no-rdoc
+ gem install gchart -v 1.0.0 --no-ri --no-rdoc
+ gem install gem_plugin -v 0.2.3 --no-ri --no-rdoc
+ gem install hashery -v 2.1.2 --no-ri --no-rdoc
+ gem install i18n -v 0.6.1 --no-ri --no-rdoc
+ gem install mongrel -v 1.2.0.pre2 --no-ri --no-rdoc
+ gem install number_to_words -v 1.2.1 --no-ri --no-rdoc
+ gem install paperclip -v 2.3.9 --no-ri --no-rdoc
+ gem install ruby-plsql -v 0.5.0 --no-ri --no-rdoc
+ gem update --system 1.4.0
+ gem list

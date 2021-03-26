@@ -1,0 +1,34 @@
+<div class="form-horizontal well">
+  <table width="100%">
+  <tr valign="middle">
+    <th width="20%"><div align="left">Telefono *</div></th>
+    <th width="30%"><div align="left">Ciudad *</div></th>
+    <th width="20%"><div align="left">Tipo *</div></th>
+    <th width="30%"><div align="left">Observaciones</div></th>
+  </tr>
+   <tr valign="top">
+      <td><%= text_field :personastelefono, :telefono,{ :class => "span2",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personastelefono, :telefono, :css_class =>"cerror"%></td>
+      <td><%= text_field :personastelefono, :ciudad,{ :class => "span3",:onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+      <%= error_message_on :personastelefono, :ciudad, :css_class =>"cerror"%></td>
+      <td>
+        <%= select(:personastelefono,:tipo, { "RESIDENCIA" => "RESIDENCIA",
+                           "OFICINA" => "OFICINA",
+                            "CELULAR" => "CELULAR",
+                         "OTRA" => "OTRA"},
+                        { :include_blank => true },
+                      { :style=>"width:180px"})%>
+        <%= error_message_on :personastelefono, :tipo, :css_class =>"cerror"%>
+      </td>
+      <td><%=text_area(:personastelefono, :observacion, :class=>"input-xlarge", :rows=>"3", :maxlength => 2000, :onChange=> "javascript:this.value=this.value.toUpperCase();") %></td>
+   </tr>
+  </table>
+  <table width="100%">
+  <tr valign="middle">
+    <th colspan="2"><div align="right">
+          <%= hidden_field :personastelefono, :id %><%= submit_tag "Guardar", :class=>"btn btn-primary"%>
+    </div></th>
+    </tr>
+  </table>
+</div>
+    
